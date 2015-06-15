@@ -23,8 +23,9 @@ echo 'deb http://archive.ubuntu.com/ubuntu trusty main universe restricted' > /e
 echo 'deb http://archive.ubuntu.com/ubuntu trusty-updates main universe restricted' >> /etc/apt/sources.list
 
 
-# Update
+# Update and dependencies
 apt-get update -qq
+apt-get install wget libpcap0.8
 
 
 #########################################
@@ -42,7 +43,9 @@ chmod 755 -R /config
 #########################################
 
 #Install dakrstat
-apt-get install -qy darkstat
+wget https://launchpad.net/ubuntu/+source/darkstat/3.0.718-2/+build/5937806/+files/darkstat_3.0.718-2_amd64.deb -P /tmp/
+dpkg -i /tmp/dark*
+
 
 # Start script for configuring darkstat
 cat <<'EOT' > /etc/my_init.d/config.sh
