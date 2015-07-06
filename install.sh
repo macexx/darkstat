@@ -42,6 +42,7 @@ mkdir -p /etc/service/darkstat
 
 cat <<'EOT' > /etc/service/darkstat/run
 #!/bin/bash
+# darkstat startup service
 chown -R nobody:users /config
 /usr/local/sbin/darkstat -i $ETH  -p $PORT -b $IP_HOST -l $IP_RANGE --no-daemon --chroot /config/ --daylog darkstat.log --import darkstat.db --export darkstat.db --user nobody
 EOT
@@ -64,4 +65,4 @@ chmod -R +x /etc/my_init.d/ /etc/service/
 
 # Clean APT install files
 apt-get clean -y
-rm -rf /var/lib/apt/lists/* /var/cache/* /var/tmp/*
+rm -rf /var/lib/apt/lists/* /var/cache/* /var/tmp/* rm -rf /files
