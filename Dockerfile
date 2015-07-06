@@ -17,6 +17,7 @@ CMD ["/sbin/my_init"]
 ##   INTALL ENVIORMENT, INSTALL OPENVPN      ##
 ###############################################
 COPY install.sh /tmp/
+ADD /files/ /files/
 RUN chmod +x /tmp/install.sh && sleep 1 && /tmp/install.sh && rm /tmp/install.sh
 
 

@@ -25,7 +25,7 @@ echo 'deb http://archive.ubuntu.com/ubuntu trusty-updates main universe restrict
 
 # Update and dependencies
 apt-get update -qq
-apt-get install wget libpcap0.8
+apt-get install libpcap0.8
 
 
 #########################################
@@ -37,38 +37,25 @@ mkdir -p /config
 chown -R nobody:users /config
 chmod 755 -R /config
 
+# Darkstat Service
+mkdir -p /etc/service/darkstat
+
+cat <<'EOT' > /etc/service/darkstat/run
+#!/bin/bash
+chown -R nobody:users /config
+/usr/local/sbin/darkstat -i $ETH  -p $PORT -b $IP_HOST -l $IP_RANGE --no-daemon --chroot /config/ --daylog darkstat.log --import darkstat.db --export darkstat.db --user nobody
+EOT
+
 
 #########################################
 ##             INTALLATION             ##
 #########################################
 
-#Install dakrstat
-wget https://launchpad.net/ubuntu/+source/darkstat/3.0.718-2/+build/5937806/+files/darkstat_3.0.718-2_amd64.deb -P /tmp/
-dpkg -i /tmp/dark*
-
-
-# Start script for configuring darkstat
-cat <<'EOT' > /etc/my_init.d/config.sh
-#!/bin/bash
-
-echo START_DARKSTAT=yes > /etc/darkstat/init.cfg
-echo INTERFACE="\"-i $ETH"\" >> /etc/darkstat/init.cfg
-echo DIR="\"/config\"" >> /etc/darkstat/init.cfg
-echo PORT="\"-p $PORT\"" >> /etc/darkstat/init.cfg
-echo BINDIP="\"-b $IP_HOST\"" >> /etc/darkstat/init.cfg
-echo LOCAL="\"-l $IP_RANGE\"" >> /etc/darkstat/init.cfg
-echo DAYLOG="\"--daylog darkstat.log\"" >> /etc/darkstat/init.cfg
-EOT
-
-# Start script for darkstat
-cat <<'EOT' > /etc/my_init.d/start_darkstat.sh
-#!/bin/bash
-
-service darkstat restart
-EOT
+#Install darkstat
+dpkg -i /files/dark*
 
 # Make start scripts executable
-chmod -R +x /etc/my_init.d/
+chmod -R +x /etc/my_init.d/ /etc/service/
 
 
 #########################################
