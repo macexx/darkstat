@@ -1,5 +1,5 @@
 # Builds a docker image for a darkstat
-FROM phusion/baseimage:0.9.17
+FROM phusion/baseimage:0.9.18
 MAINTAINER Mace Capri <macecapri@gmail.com>
 
 ###############################################
