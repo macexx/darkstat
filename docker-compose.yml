@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  darkstats:
+    container_name: darkstats
+    image: mace/darkstat
+    network_mode: host
+    volumes:
+      - ./config:/config
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ETH={interface}
+      - PORT={port_open}
+      - IP_HOST={ip_host}
+      - IP_RANGE={gateway/subnet}
