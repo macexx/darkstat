@@ -35,7 +35,20 @@ docker run -d --net="host"  --name=darkstat -v /mylocal/directory/fordata:/confi
 
 **Using Docker-compose**
 
-first, configure correctly the `docker-compose.yml` file. then run command bellow:
+copy `.env.example` to `.env` and fill the value with your configuration, example :
+```.env
+INTERFACE=eth0
+PORT=80
+IP_HOST=192.168.0.2
+GWSUBNET=192.168.0.1/24
+```
+
+then, build `Dockerfile`, run this command:
+```sh
+  $ docker build -t darkstats
+```
+
+if everythings done, let deploy the with compose. run command bellow:
 ```
 docker-compose up -d
 ```
