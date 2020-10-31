@@ -1,6 +1,6 @@
 # Builds a docker image for a darkstat
 FROM phusion/baseimage:0.9.18
-MAINTAINER Mace Capri <macecapri@gmail.com>
+LABEL maintainer="Mace Capri" maintainer2="kankuu" email="macecapri@gmail.com" email2="akhmadbasir5@gmail.com"
 
 ###############################################
 ##           ENVIRONMENTAL CONFIG            ##

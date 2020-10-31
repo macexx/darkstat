@@ -33,6 +33,26 @@ http://<host ip>:[PORT]
 docker run -d --net="host"  --name=darkstat -v /mylocal/directory/fordata:/config -v /etc/localtime:/etc/localtime:ro -e ETH=eth0 -e PORT=666 -e IP_HOST=192.168.1.10 -e IP_RANGE=192.168.1.0/255.255.255.0 mace/darkstat
 ```
 
+**Using Docker-compose**
+
+copy `.env.example` to `.env` and fill the value with your configuration, example :
+```.env
+INTERFACE=eth0
+PORT=80
+IP_HOST=192.168.0.2
+GWSUBNET=192.168.0.1/24
+```
+
+then, build `Dockerfile`, run this command:
+```sh
+  $ docker build -t darkstats
+```
+
+if everythings done, let deploy the with compose. run command bellow:
+```
+docker-compose up -d
+```
+
 **Additional notes**
 
 * To clear the database just delete it on the host.
